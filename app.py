@@ -156,4 +156,4 @@ if uploaded_file is not None:
 # 🧾 About section
 st.markdown("<hr style='border:1px solid #bbb;'>", unsafe_allow_html=True)
 st.markdown("<h3 style='color:#880e4f;'>About This Project</h3>", unsafe_allow_html=True)
-st.write("A deepfake detection project by Team Aegis using face-based CNN classification with MTCNN + MobileNetV2.")
+st.write("A deepfake detection project by Team Aegis using face-based CNN classification with MTCNN + CustomCNN.")
