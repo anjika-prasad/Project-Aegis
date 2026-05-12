@@ -9,7 +9,7 @@ from mtcnn import MTCNN
 # Set Streamlit page config
 st.set_page_config(page_title="Deepfake analyser", layout="wide")
 
-# 💅 Custom CSS
+# Custom CSS
 st.markdown("""
     <style>
     body { background-color: #fff0f5; }
@@ -62,14 +62,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 🧠 Load model and detector
+# Load model and detector
 model = load_model("deepfake_cnn_model.h5")
 detector = MTCNN()
 
-# 💻 Taskbar
+# Taskbar
 st.markdown("""
     <div class="taskbar">
-        <div><strong style='font-size: 20px;'>💖 Deepfake Analyzer</strong></div>
+        <div><strong style='font-size: 20px;'> Deepfake Analyzer</strong></div>
         <div>
             <a href="#upload">Upload</a>
             <a href="#results">Results</a>
@@ -78,11 +78,11 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# 🎯 Title
+# Title
 st.markdown("<h1 style='color:#880e4f;'>Deepfake Detector</h1>", unsafe_allow_html=True)
 st.write("Upload a video to get started.")
 
-# 📦 Upload + Results cards
+#  Upload + Results cards
 col1, spacer, col2 = st.columns([2, 0.5, 2])
 
 with col1:
@@ -102,7 +102,7 @@ with col2:
         </div>
     """, unsafe_allow_html=True)
 
-# 🔍 Face Extraction & Prediction Logic
+# Face Extraction & Prediction Logic
 def extract_faces_from_video(video_path, max_faces=10):
     cap = cv2.VideoCapture(video_path)
     faces = []
@@ -129,7 +129,7 @@ def extract_faces_from_video(video_path, max_faces=10):
     cap.release()
     return faces
 
-# 🎥 Process uploaded video
+# Process uploaded video
 if uploaded_file is not None:
     with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as temp_video:
         temp_video.write(uploaded_file.read())
@@ -145,15 +145,15 @@ if uploaded_file is not None:
             preds = model.predict(faces_np)
             avg_prob = np.mean(preds)
 
-            st.subheader("🎯 Prediction:")
+            st.subheader(" Prediction:")
             if avg_prob > 0.5:
-                st.error(f"⚠️ This video is likely a **DEEPFAKE** ({avg_prob:.2f} confidence)")
+                st.error(f"This video is likely a **DEEPFAKE** ({avg_prob:.2f} confidence)")
             else:
-                st.success(f"✅ This video is likely **REAL** ({1 - avg_prob:.2f} confidence)")
+                st.success(f"This video is likely **REAL** ({1 - avg_prob:.2f} confidence)")
 
     os.remove(temp_path)
 
-# 🧾 About section
+# About section
 st.markdown("<hr style='border:1px solid #bbb;'>", unsafe_allow_html=True)
 st.markdown("<h3 style='color:#880e4f;'>About This Project</h3>", unsafe_allow_html=True)
 st.write("A deepfake detection project by Team Aegis using face-based CNN classification with MTCNN + CustomCNN.")
